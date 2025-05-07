@@ -11,7 +11,15 @@ public class Traversals {
    * @return the sum of leaf node values, or 0 if the tree is null
    */
   public static int sumLeafNodes(TreeNode<Integer> node) {
-    return 0;
+    if(node == null) return 0;
+
+    int sum = 0;
+    if(node.left == null && node.right == null){
+      sum =+ node.value;
+    }
+
+
+    return sumLeafNodes(node.left) + sumLeafNodes(node.right) + sum;
   }
 
   /**
@@ -23,7 +31,15 @@ public class Traversals {
    * @return the count of internal nodes, or 0 if the tree is null
    */
   public static int countInternalNodes(TreeNode<Integer> node) {
-    return 0;
+    if(node == null) return 0;
+
+    int sum = 0;
+    if(node.left != null || node.right != null){
+      sum =+ 1;
+    }
+
+
+    return countInternalNodes(node.left) + countInternalNodes(node.right) + sum;
   }
 
   /**
@@ -37,7 +53,9 @@ public class Traversals {
    * @return a post-order traversal string, or an empty string if the tree is null
    */
   public static <T> String buildPostOrderString(TreeNode<T> node) {
-    return null;
+    if(node == null) return "";
+
+    return buildPostOrderString(node.left) + buildPostOrderString(node.right) + node.value;
   }
 
   /**
@@ -49,7 +67,22 @@ public class Traversals {
    * @return a list of node values in a top-to-bottom order, or an empty list if the tree is null
    */
   public static <T> List<T> collectLevelOrderValues(TreeNode<T> node) {
-    return null;
+    Queue<TreeNode<T>> queue = new LinkedList<>();
+    List<T> list = new ArrayList<T>();
+    if(node == null){
+      return list;
+    }
+    queue.add(node);
+    while(!queue.isEmpty()){
+      TreeNode<T> newNode = queue.poll();
+      if(newNode != null){
+        list.add(newNode.value);
+        queue.add(newNode.left);
+        queue.add(newNode.right);
+      }
+      
+    }
+    return list;
   }
 
   /**
@@ -60,6 +93,7 @@ public class Traversals {
    * @return the number of unique values in the tree, or 0 if the tree is null
    */
   public static int countDistinctValues(TreeNode<Integer> node) {
+    
     return 0;
   }
 
