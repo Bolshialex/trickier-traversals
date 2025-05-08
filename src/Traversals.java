@@ -149,7 +149,26 @@ public class Traversals {
    * @return true if the trees have the same shape, false otherwise
    */
   public static <T> boolean haveSameShape(TreeNode<T> nodeA, TreeNode<T> nodeB) {
-    return false;
+    Stack <TreeNode<T>> stA = new Stack<>();
+    Stack <TreeNode<T>> stB = new Stack<>();
+
+    stA.add(nodeA);
+    stB.add(nodeB);
+
+    while(!stA.isEmpty() && !stB.isEmpty()){
+      TreeNode<T> newNodeA = stA.pop();
+      TreeNode<T> newNodeB = stB.pop();
+      if(newNodeA != null && newNodeB != null){
+        if(stA.size() == stB.size()){
+          stA.add(newNodeA.right);
+          stA.add(newNodeA.left);
+          stB.add(newNodeB.right);
+          stB.add(newNodeB.left);
+        }else return false;
+      }else if(newNodeA != newNodeB)return false;
+    }
+
+    return true;
   }
 
 
